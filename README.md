@@ -30,7 +30,7 @@ A web-based application to streamline health services for students in educationa
    ```
 
 2.**Mail Id setup**
-   In app.py Link your Mail Id and Password for 'Forget Password' Feature
+- In app.py Link your Mail Id and Password for 'Forget Password' Feature
 
 3. **Navigate to the project**
    ```bash
@@ -50,5 +50,5 @@ A web-based application to streamline health services for students in educationa
    localhost: [Port number]
    ```
 7.**Login in detail**
-  Insert details of Yours in mysql for Login Feature and Receivence of Mail 
+- Insert details of Yours in mysql for Login Feature and Receivence of Mail 
 
