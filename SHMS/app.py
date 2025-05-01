@@ -131,8 +131,8 @@ def forgot_password():
                 session['otp_time'] = datetime.now(timezone.utc).isoformat()
                 server = smtplib.SMTP('smtp.gmail.com',587)
                 server.starttls()
-                from_mail='timep2861@gmail.com'
-                server.login(from_mail,'bcqd jcor vyuk ivaf')
+                from_mail=''
+                server.login(from_mail,'')
                 msg = EmailMessage()
                 msg['Subject']='SHMs OTP Verification'
                 msg['From']=from_mail
@@ -154,8 +154,8 @@ def forgot_password():
                 session['otp_time'] = datetime.now(timezone.utc).isoformat()
                 server = smtplib.SMTP('smtp.gmail.com', 587)
                 server.starttls()
-                from_mail='timep2861@gmail.com'
-                server.login(from_mail,'bcqd jcor vyuk ivaf')
+                from_mail=''
+                server.login(from_mail,'')
                 msg = EmailMessage()
                 msg['Subject'] = 'SHMs OTP Verification'
                 msg['From'] = from_mail
