@@ -22,7 +22,7 @@ create table all_users_detail(
     user_password REGEXP '[^a-zA-Z0-9]')
 );
 
-INSERT INTO all_users_detail VALUES('raghavzanwar18@gmail.com','Test@12345','Student');
+INSERT INTO all_users_detail VALUES('joyson@gmail.com','Test@12345','Student');
 INSERT INTO all_users_detail VALUES('ajayshetty@gmail.com','Test@12345','Doctor');
 INSERT INTO all_users_detail VALUES('malisingh25@gmail.com','Test@12345','Doctor');
 
@@ -40,7 +40,7 @@ CREATE TABLE student (
 	foreign key (student_email) references all_users_detail(user_email)  on delete cascade
 );
 
-INSERT INTO student VALUES(1,'joy son','10-2-2005',20,'raghavzanwar18@gmail.com',9876543210,'xyz,Delhi','Male',1);
+INSERT INTO student VALUES(1,'joy son','10-2-2005',20,'joyson@gmail.com',9876543210,'xyz,Delhi','Male',1);
 
 CREATE TABLE parent_detail (
     student_id INT PRIMARY KEY,
