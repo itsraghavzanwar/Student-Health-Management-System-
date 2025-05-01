@@ -11,9 +11,9 @@ A web-based application to streamline health services for students in educationa
 - Students can rate healthcare services
   
 **For Doctor**
--The admin team will manually create the account after verifying all the details provided through mail
--After payment is processed, the doctor detail will be displayed
--Approvment for an appointments
+- The admin team will manually create the account after verifying all the details provided through mail
+- After payment is processed, the doctor detail will be displayed
+- Approvment for an appointments
 - Doctors can view appointments and student records
 
 ## 🛠️ Technologies Used
