@@ -29,20 +29,26 @@ A web-based application to streamline health services for students in educationa
    git clone https://github.com/your-username/SHMS.git
    ```
 
-2. **Navigate to the project**
+2.**Mail Id setup**
+ In app.py Link your Mail Id and Password for 'Forget Password' Feature
+
+3. **Navigate to the project**
    ```bash
    cd SHMS
    ```
 
-3. **Set up the database**
+4. **Set up the database**
    - Import the `setup.sql` file into your MySQL server.
 
-4. **Run the Flask app**
+5. **Run the Flask app**
    ```bash
    python app.py
    ```
 
-5. **Run on Local Host**
+6. **Run on Local Host**
    ```bash
    localhost: [Port number]
    ```
+7.**Login in detail**
+ Insert details of Yours in mysql for Login Feature and Receivence of Mail 
+
