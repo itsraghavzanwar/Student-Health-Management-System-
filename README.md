@@ -4,34 +4,23 @@
 A web-based application to streamline health services for students in educational institutions.
 
 ## 🚀 Features
-
-- Student registration and login
+**For Student**
+- Student login and forget password
 - Book appointments with doctors
-- Doctors can view appointments and student records
-- Admin can manage users and services
+- Student can chat with doctor
 - Students can rate healthcare services
+  
+**For Doctor**
+-The admin team will manually create the account after verifying all the details provided through mail
+-After payment is processed, the doctor detail will be displayed
+-Approvment for an appointments
+- Doctors can view appointments and student records
 
 ## 🛠️ Technologies Used
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Python (Flask)
 - **Database**: MySQL
-
-## 📁 File Structure
-
-```
-/SHMS
-|-- app.py                # Main backend logic using Flask
-|-- templates/
-|   |-- login.html
-|   |-- register.html
-|   |-- dashboard.html
-|-- static/
-|   |-- styles.css
-|   |-- script.js
-|-- db/
-|   |-- setup.sql         # MySQL table definitions
-```
 
 ## 🖥️ Setup Instructions
 
