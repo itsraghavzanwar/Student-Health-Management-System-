@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Window</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='doctor_info.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style></style>
+</head>
+
+<body>
+
+    <section class="data">
+
+        <form action="/doctor-info" method="POST">
+
+            <div class="main">
+
+                <div class="sidebar">
+
+                    <a href="{{url_for('student_dashboard')}}" style="text-decoration: none;">
+
+                        <div class="user_data_icon">
+                            <span class="img"><ion-icon name="home-outline"></ion-icon></span>
+                            <p class="icon_text">Profile</p>
+                        </div>
+                    </a>
+
+                    <a href="{{url_for('doctor_info')}}" style="text-decoration: none;">
+
+                        <div class="doctor_icon">
+                            <span class="img"><ion-icon name="person-outline"></ion-icon></span>
+                            <p class="icon_text">Doctor</p>
+                        </div>
+                    </a>
+
+                    <a href="{{url_for('appointment')}}" style="text-decoration: none;">
+                    
+                        <div class="appointment_icon">
+                            <span class="img"><ion-icon name="call-outline"></ion-icon></span>
+                            <p class="icon_text">Appointment</p>
+                        </div>
+                    </a>
+
+                    <a href="{{url_for('medication')}}" style="text-decoration: none;">
+
+                        <div class="medication_icon">
+                            <span class="img"><ion-icon name="medkit-outline"></ion-icon></span>
+                            <p class="icon_text">Medication</p>
+                        </div>
+                    </a>
+
+                    <a href="{{url_for('Medical_record')}}" style="text-decoration: none;">
+
+                        <div class="medical_record_icon">
+                            <span class="img"><ion-icon name="reader-outline"></ion-icon></span>
+                            <p class="icon_text">Record</p>
+                        </div>
+                    </a>
+
+                    <a href="{{url_for('chat')}}" style="text-decoration: none;">
+                    
+                        <div class="chat_icon">
+                            <span class="img"><ion-icon name="chatbox-ellipses-outline"></ion-icon></span>
+                            <p class="icon_text">Chat</p>
+                        </div>
+                    </a>
+                    
+                    <a href="{{url_for('your_activity')}}" style="text-decoration: none;">
+                    
+                        <div class="your_activity_icon">
+                            <span class="img"><ion-icon name="options-outline"></ion-icon></span>
+                            <p class="icon_text">Activity</p>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="content">
+                    <div class="select1">
+                        <div class="select2">
+
+                            <select name="city" id="city-select">
+                                <option value="default" {% if selected_city=='default' %}selected{% endif %}>city</option>
+                                <option value="Pune" {% if selected_city=='Pune' %}selected{% endif %}>Pune</option>
+                            </select>
+                        </div>
+                        <div class="select3">
+                            <select name="specialization" id="specialization-select">
+                                <option value="default" {% if selected_specialization=='default' %}selected{% endif %}>specialization</option>
+                                <option value="Psychiatrist" {% if selected_specialization=='Psychiatrist' %}selected{% endif %}>Psychiatrist
+                                </option>
+                                <option value="Ophthalmologist" {% if selected_specialization=='Ophthalmologist' %}selected{% endif %}>
+                                    Ophthalmologist</option>
+                            </select>
+                        </div>
+                        <button class="button1">submit</button>
+                    </div>
+                    {% if doctor_list %}
+                        <h2>Doctors in your City :</h2>
+                        {% for doctor in doctor_list %}
+                            <a href="{{url_for('doctor_request',doctor_id=doctor[0])}} " style="text-decoration: none;" >
+                                <div class="block">
+                                    <img src="{{url_for('static',filename=doctor[1]+'.png')}}"  class="image" alt="photo">
+                                    <div class="two">
+                                        <div class="pattern">
+                                            <h3>{{doctor[1]}}</h3>
+                                            <div class="rating-container">
+                                                
+                                                <div class="google-rating">
+                                                    <strong>Google Rating:</strong>
+                                                    {% set google_rating = doctor[11] %}
+                                                    {% set total_google_rating = doctor[12] %}
+                                                    <div>
+                                                        {% for i in range(1, 6) %}
+                                                        {% if i <= google_rating %}
+                                                            <i class="fas fa-star" style="color: gold;"></i>
+                                                            {% elif i - google_rating < 1 %} 
+                                                                <i class="fas fa-star-half-alt" style="color: gold;"></i>
+                                                            {% else %}
+                                                                <i class="far fa-star" style="color: gold;"></i>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <span>({{ total_google_rating }})</span>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="user-rating">
+                                                    <strong>Platform Rating:</strong>
+                                                    {% set user_rating = doctor[13] %}
+                                                    {% set user_count = doctor[14] %}
+                                                    <div>
+                                                        {% for i in range(1, 6) %}
+                                                        {% if i <= user_rating %}
+                                                            <i class="fas fa-star" style="color: gold;"></i>
+                                                            {% elif i - user_rating < 1 %}
+                                                                <i class="fas fa-star-half-alt" style="color: gold;"></i>
+                                                            {% else %}
+                                                                <i class="far fa-star" style="color: gold;"></i>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <span>({{ user_count }})</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="block_data">
+                                        
+                                            <div class="same">
+                                                <p class="done">licence No : {{doctor[9]}}</p>
+                                                <p class="done">Hospital No : {{doctor[3]}}</p>
+                                            </div>
+                                            <div class="same1">
+                                                <p class="done">Speciality : {{doctor[2]}}</p>
+                                                <p class="done">Consulation fee : {{doctor[10]}}</p>
+                                            </div>
+                                            <div class="same2">
+                                                <p class="done">Email : {{doctor[4]}}</p>
+                                                <p class="done">Address : {{doctor[5]}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <h2>No doctors found in your city.</h2>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </form>
+
+    </section>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
