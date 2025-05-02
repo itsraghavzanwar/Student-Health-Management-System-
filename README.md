@@ -29,7 +29,7 @@ A web-based application to streamline health services for students in educationa
    git clone https://github.com/your-username/SHMS.git
    ```
 
-2.**Mail Id setup**
+2. **Mail Id setup**
 - In app.py Link your Mail Id and Password for 'Forget Password' Feature in 'forgot_password' Function at two if condition i.e 'username' and 'resend'
 
 3. **Navigate to the project**
@@ -49,6 +49,5 @@ A web-based application to streamline health services for students in educationa
    ```bash
    localhost: [Port number]
    ```
-7.**Login in detail**
+7. **Login in detail**
 - For login functionality and email reception, please ensure your credentials are correctly stored in the MySQL database. Alternatively, you may log in using the provided credentials: Username: joyson@gmail.com Password: Test@12345 . However, please note that the 'Forgot Password' feature will not be operational, as email notifications will not be received
-
