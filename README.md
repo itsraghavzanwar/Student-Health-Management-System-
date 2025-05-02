@@ -40,14 +40,19 @@ A web-based application to streamline health services for students in educationa
 4. **Set up the database**
    - Import the `setup.sql` file into your MySQL server.
 
-5. **Run the Flask app**
+5. **Install Flask**
+   ```bash
+   pip install flask
+   ```
+
+6. **Run the Flask app**
    ```bash
    python app.py
    ```
 
-6. **Run on Local Host**
+7. **Run on Local Host**
    ```bash
    localhost: [Port number]
    ```
-7. **Login in detail**
+8. **Login in detail**
 - For login functionality and email reception, please ensure your credentials are correctly stored in the MySQL database. Alternatively, you may log in using the provided credentials: Username: joyson@gmail.com Password: Test@12345 . However, please note that the 'Forgot Password' feature will not be operational, as email notifications will not be received
