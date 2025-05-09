@@ -7,7 +7,6 @@ A web-based application to streamline health services for students in educationa
 **For Student**
 - Student login and forget password
 - Book appointments with doctors
-- Student can chat with doctor
 - Students can rate healthcare services
   
 **For Doctor**
