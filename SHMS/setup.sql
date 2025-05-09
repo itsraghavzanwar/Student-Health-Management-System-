@@ -24,7 +24,7 @@ create table all_users_detail(
 
 INSERT INTO all_users_detail VALUES('joyson@gmail.com','Test@12345','Student')
 ,('ajayshetty@gmail.com','Test@12345','Doctor')
-,('malisingh25@gmail.com','Test@12345','Doctor');
+,('malikasingh25@gmail.com','Test@12345','Doctor');
 
 CREATE TABLE student (
     student_id INT primary key,
