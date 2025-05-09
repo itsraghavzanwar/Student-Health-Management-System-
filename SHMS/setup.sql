@@ -106,8 +106,6 @@ create table user_rating(
     foreign key(user_id) references student(student_id)
 );
 
-insert into user_rating values(1000,4,'he had resolved all the issue of mine.',1);
-
 create table google_rating(
 	doctor_id int,
     doctor_google_rating float,
