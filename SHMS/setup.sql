@@ -22,7 +22,7 @@ create table all_users_detail(
     user_password REGEXP '[^a-zA-Z0-9]')
 );
 
-INSERT INTO all_users_detail VALUES('raghavzanwar18@gmail.com','Test@12345','Student')
+INSERT INTO all_users_detail VALUES('joyson@gmail.com','Test@12345','Student')
 ,('ajayshetty@gmail.com','Test@12345','Doctor')
 ,('malisingh25@gmail.com','Test@12345','Doctor');
 
@@ -40,7 +40,7 @@ CREATE TABLE student (
 	foreign key (student_email) references all_users_detail(user_email)  on delete cascade
 );
 
-INSERT INTO student VALUES(1,'joy son','10-2-2005',20,'raghavzanwar18@gmail.com',9876543210,'xyz,Delhi','Male',1);
+INSERT INTO student VALUES(1,'Joy Son','10-2-2005',20,'joyson@gmail.com',9876543210,'xyz,Delhi','Male',1);
 
 CREATE TABLE parent_detail (
     student_id INT PRIMARY KEY,
@@ -82,7 +82,7 @@ CREATE TABLE doctor (
 
 INSERT INTO doctor(doctor_name,doctor_speciality,doctor_phone,doctor_email,doctor_address,doctor_city,doctor_gender,doctor_dateofbirth,licence_no,consultation_fee) VALUES('Dr. Ajay Shetty','Psychiatrist',5820146397,'ajayshetty@gmail.com',
 'The Business Hub , kothrud','Pune','Male','14-02-1994','ABC123456',400),
-('Dr. Mali Singh','Ophthalmologist',1042633497,'malisingh25@gmail.com',
+('Dr. Malika Singh','Ophthalmologist',1042633497,'malikasingh25@gmail.com',
 'The Optic Angel , Ideal Colony','Pune','Female','16-01-1999','XYZ',250);
 
 CREATE TABLE appointment (
