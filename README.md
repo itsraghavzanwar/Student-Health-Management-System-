@@ -42,6 +42,8 @@ A web-based application to streamline health services for students in educationa
 5. **Install Flask and PyMySQL**
    ```bash
    pip install flask
+   ```
+   ```bash
    pip install PyMySQL
    ```
 
