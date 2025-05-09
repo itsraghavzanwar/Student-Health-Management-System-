@@ -39,9 +39,10 @@ A web-based application to streamline health services for students in educationa
 4. **Set up the database**
    - Import the `setup.sql` file into your MySQL server.
 
-5. **Install Flask**
+5. **Install Flask and PyMySQL**
    ```bash
    pip install flask
+   pip install PyMySQL
    ```
 
 6. **Run the Flask app**
