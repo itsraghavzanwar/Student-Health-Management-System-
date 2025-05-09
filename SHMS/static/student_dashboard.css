@@ -1,0 +1,198 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+}
+
+input,button, textarea, select {
+  font: inherit;
+}
+@media screen and (min-width: 800px) {
+    
+    body{
+        background-color: #222222;
+    }
+    
+    .main{
+        display: flex;
+    }
+
+    .content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar{
+        position: absolute;
+        width: 60px;
+        height: 720px;
+        background-color: #5e7c80;
+        overflow: hidden;
+        transition: 0.8s;
+        border-radius: 9px;
+    }
+
+    .sidebar:hover{
+        width: 190px;
+    }
+
+    .img{
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        margin-left: 12px;
+        color: #5e7c80;
+    }
+
+    .user_data_icon{
+        display: flex;
+        flex-direction: row;
+        margin-top: 25px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0  0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .doctor_icon{
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .medical_record_icon{
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .appointment_icon{
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .medication_icon{
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .icon_text{
+        color: #495657;
+        font-weight: bold;
+        font-size: medium;
+        margin-left: 12px;
+        background-color: #a6ccd1;
+    }
+
+    .img_logout_row{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .user_image{
+        height: 170px;
+        width: 170px;
+        display: flex;
+        border: 2px solid #a6ccd1;
+        border-radius: 9px;
+        background-color: #222222;
+        margin-top: 30px;
+        margin-left: 230px;
+    }
+    
+    .logout{
+        margin-top: 30px;
+        display: flex;
+        margin-left: 1000px;
+        justify-content: center;
+        height: 32px;
+        background-color: #222222;
+    }
+    
+    .text{
+        border: 1px solid #a6ccd1;
+        border-radius: 8px;
+        color: #a6ccd1;
+        font-weight: bold;
+        background-color: #222222;
+        padding: 2px 6px;
+    }
+    
+    .data_row{
+        display: flex;
+        flex-direction: row;
+        margin-left: 130px;
+    }
+    
+    .data_text{
+        color: #5e7c80;
+    }
+
+    .user_data{
+        box-shadow: 0px 0px 20px 2px #181919;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 70px;
+        margin-top: 20px;
+        font-weight: 500;
+        font-size: 17px;
+        align-items: flex-start;
+        margin-left: 80px;
+    }
+
+    .college_data1{
+        box-shadow: 0px 0px 20px 2px #181919;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 100px;
+        margin-top: 20px;
+        font-weight: 500;
+        font-size: 17px;
+        margin-left: 50px;
+        align-items: flex-start;
+    }
+
+    .parent_data{
+        box-shadow: 0px 0px 20px 2px #181919;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding-left: 20px;
+        padding-right: 70px;
+        margin-top: 20px;
+        font-weight: 500;
+        font-size: 17px;
+        margin-left: 50px;
+        align-items: flex-start;
+    }
+
+    h1{
+        display: flex;
+        color: #a6ccd1;
+        font-size: 30px;
+        border: 1px solid #a6ccd1;
+        padding: 2px 8px;
+        border-radius: 9px;
+    }
+
+}

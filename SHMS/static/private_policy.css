@@ -1,0 +1,48 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+@media screen and (min-width: 800px) {
+
+    body {
+        background-color: #222222;
+    }
+
+    .body {
+        box-shadow: 0px 0px 20px 2px #181919;
+        border-radius: 9px;
+        padding: 20px;
+        margin: 25px;
+    }
+
+    h1 {
+        color: #a6ccd1;
+        margin-left: 550px;
+    }
+
+    .content {
+        margin-top: 50px;
+        margin-left: 25px;
+        color: #5e7c80;
+        font-size: 20px;
+    }
+
+    .return {
+        border: 1px solid #6b7d7e;
+        background-color: #282826;
+        border-radius: 8px;
+        color: #a6ccd1;
+        margin-left: 650px;
+        padding: 5px;
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+}
