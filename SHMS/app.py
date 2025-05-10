@@ -338,18 +338,19 @@ def appointment():
 @app.route('/reviewing',methods=['GET','POST'])
 def reviewing():
     if request.method == 'GET':
-        if request.method == 'GET':
-            doctor_id = request.args.get('doctor_id')
-            user_id = request.args.get('user_id')
-            rating = request.args.get('rating')
-            comment = request.args.get('comment')
+        doctor_id = request.args.get('doctor_id')
+        user_id = request.args.get('user_id')
+        rating = request.args.get('rating')
+        comment = request.args.get('comment')
 
-            if rating and comment and doctor_id and user_id:
-                cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s)""", (doctor_id, rating, comment, user_id))
-                cursor.connection.commit()
+        if rating and comment and doctor_id and user_id:
+            cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s)""", (doctor_id, rating, comment, user_id))
+            cursor.connection.commit()
 
-                return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
-
+            return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
+        elif comment == None:
+            return render_template('review.html')
+        
     elif request.method == 'POST':
         doctor_id = request.form['doctor_id']
         user_id = request.form['user_id']
