@@ -81,7 +81,11 @@ def login():
                 session.permanent = False
             if profession == 'Student':
                 session['email']=username
-                return redirect(url_for('student_dashboard'))
+                cursor.execute("SELECT student_id FROM student WHERE student_email = %s", (username,))
+                result = cursor.fetchone()
+                if result:
+                    session['user_id'] = result[0]  # <-- add this line!
+                    return redirect(url_for('student_dashboard'))
             elif profession == 'Doctor':
                 session['email']=username
                 return redirect(url_for('doctor_dashboard'))
@@ -337,23 +341,36 @@ def appointment():
 
 @app.route('/reviewing',methods=['GET','POST'])
 def reviewing():
+    doctor_id = request.args.get('doctor_id')
+    user_id = session.get('user_id')
+    if doctor_id:
+        session['doctor_id'] = doctor_id
+    return render_template('review.html', doctor_id=doctor_id, user_id=user_id)
+
+@app.route('/review',methods=['GET','POST'])
+def review():
     if request.method == 'GET':
-        doctor_id = request.args.get('doctor_id')
-        user_id = request.args.get('user_id')
+        doctor_id = session.get('doctor_id')
+        user_id = session.get('user_id') 
         rating = request.args.get('rating')
         comment = request.args.get('comment')
+        print("doctor_id:", doctor_id)
+        print("user_id:", user_id)
+        print("rating:", rating)
+        print("comment:", comment)
+        if not (doctor_id and user_id and rating and comment):
+            print("Missing data, not inserting review")
+            return redirect(url_for('doctor_request', doctor_id=doctor_id))
 
         if rating and comment and doctor_id and user_id:
             cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s)""", (doctor_id, rating, comment, user_id))
             cursor.connection.commit()
 
             return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
-        elif comment == None:
-            return render_template('review.html')
         
     elif request.method == 'POST':
-        doctor_id = request.form['doctor_id']
-        user_id = request.form['user_id']
+        doctor_id = session.get('doctor_id')
+        user_id = session.get('user_id')
         rating = request.form['rating']
         comment = request.form['comment']
 
@@ -378,9 +395,8 @@ def doctor_request():
     user_id = request.args.get('user_id')
     if request.method == 'GET':
         if doctor_id:
-            
-
             session['doctor_id'] = doctor_id
+            user_id=session.get('user_id')
 
             cursor.execute("SELECT * FROM doctor WHERE doctor_id = %s", (doctor_id,))
             doctor = cursor.fetchone()
@@ -412,7 +428,8 @@ def doctor_request():
                 doctor=doctor,
                 user_rating=user_rating,
                 google_rating=google_rating,
-                rating_data=rating_data
+                rating_data=rating_data,
+                userIid=user_id
             )
     
     elif request.method == 'POST':

@@ -127,9 +127,10 @@ select {
         border-radius: 9px;
         background-color: #181919;
         color: #5e7c80;
-        margin-left: 250px;
+        margin-left: 320px;
         height:150px;
         padding: 5px;
+        width: 300px;
     }
 
     .submit1{
@@ -138,10 +139,10 @@ select {
         box-shadow: 0 0px 10px 1px #181919;
         background-color: #181919;
         color: #5e7c80;
-        margin-left: 450px;
+        margin-left: 430px;
         padding: 6px 12px;
         font-size: 18px;
-        width: fit-content;   /* ✅ Shrink width to fit text */
+        width: fit-content;
         
     }
 
