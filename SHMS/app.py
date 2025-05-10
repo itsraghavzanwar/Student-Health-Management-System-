@@ -368,14 +368,8 @@ def review():
 
         cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s) """, (doctor_id, rating, comment, user_id))
         cursor.connection.commit()
-    
-        cursor.execute("SELECT * FROM doctor WHERE doctor_id = %s", (doctor_id,))
-        doctor = cursor.fetchone()
 
-        cursor.execute("""SELECT s.student_name, ur.doctor_rating, ur.comment FROM user_rating ur JOIN student s ON ur.user_id = s.student_id WHERE ur.doctor_id = %s""", (doctor_id,))
-        rating_data = cursor.fetchall()
-
-        return render_template('doctor_request.html',doctor=doctor, rating_data=rating_data)
+        return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
 
 
 @app.route('/doctor-request', methods=['GET', 'POST'])
@@ -383,6 +377,7 @@ def doctor_request():
     doctor = None
     user_rating = None
     google_rating = None
+    rating_data=[]
     doctor_id = request.args.get('doctor_id')
     user_id = request.args.get('user_id')
     if request.method == 'GET':
@@ -460,8 +455,7 @@ def doctor_request():
         
         return render_template('doctor_request.html', error="Student not found!", doctor=doctor,rating_data=rating_data)
 
-    return render_template('doctor_request.html',rating_data=rating_data)
-
+    return render_template('doctor_request.html',doctor=doctor,user_rating=user_rating,google_rating=google_rating,rating_data=rating_data,userIid=user_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
