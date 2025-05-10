@@ -62,10 +62,24 @@
                 </div>
 
                 <div class="content">
+                    <h2>Rate Your Doctor</h2>
 
-
-
+                    <form action="/submit_review" method="POST">
+                        <div class="star-rating">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
+                        <input type="hidden" name="rating" id="rating">
+                        <textarea name="comment" placeholder="Leave a comment..."></textarea>
+                        <input type="hidden" name="doctor_id" value="{{ doctor_id }}">
+                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                        <button type="submit">Submit</button>
+                    </form>
                 </div>
+
             </div>
 
         </form>
@@ -74,6 +88,21 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- ⭐ Add this new script block here -->
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach((star, idx) => {
+            star.addEventListener('click', () => {
+                ratingInput.value = star.dataset.value;
+                stars.forEach((s, i) => {
+                    s.classList.toggle('selected', i < idx + 1);
+                });
+            });
+        });
+    </script>
+</body>
 
 </body>
 

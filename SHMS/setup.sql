@@ -99,7 +99,7 @@ CREATE TABLE appointment (
 
 create table user_rating(
 	doctor_id int,
-	doctor_rating float,
+	doctor_rating int,
     comment text,
     user_id int,
     foreign key(doctor_id) references doctor(doctor_id),

@@ -105,4 +105,15 @@ select {
         background-color: #a6ccd1;
     }
 
+    .star-rating {
+        font-size: 2rem;
+        color: lightgray;
+        cursor: pointer;
+    }
+
+    .star-rating .star.selected,.star-rating .star:hover,.star-rating .star:hover ~ .star {
+        color: gold;
+    }
+
+
 }

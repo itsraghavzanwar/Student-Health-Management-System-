@@ -4,6 +4,7 @@ from flask import make_response
 import pymysql
 import random
 from datetime import datetime,timezone,timedelta
+import sqlite3
 
 import smtplib
 from email.message import EmailMessage
@@ -337,7 +338,28 @@ def appointment():
 
 @app.route('/reviewing',methods=['GET'])
 def reviewing():
-    return render_template('review.html')
+    doctor_id = 1  # fetch based on context
+    user_id = 2    # fetch from session or context
+    return render_template('review.html', doctor_id=doctor_id, user_id=user_id)
+
+@app.route('/submit_review', methods=['POST'])
+def submit_review():
+    doctor_id = request.form['doctor_id']
+    user_id = request.form['user_id']
+    rating = request.form['rating']
+    comment = request.form['comment']
+
+    # Insert into DB
+    conn = sqlite3.connect('your_db_file.db')  # replace with actual DB path
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id)
+        VALUES (?, ?, ?, ?)
+    """, (doctor_id, rating, comment, user_id))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('reviewing'))
 
 @app.route('/doctor-request', methods=['GET', 'POST'])
 def doctor_request():
