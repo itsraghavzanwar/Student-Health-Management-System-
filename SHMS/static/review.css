@@ -1,0 +1,108 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+@media screen and (min-width: 800px) {
+
+    body {
+        background-color: #222222;
+    }
+
+    .main {
+        display: flex;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        margin-left: 220px;
+    }
+
+    .sidebar {
+        position: absolute;
+        width: 60px;
+        height: 720px;
+        background-color: #5e7c80;
+        overflow: hidden;
+        transition: 0.8s;
+        border-radius: 9px;
+    }
+
+    .sidebar:hover {
+        width: 190px;
+    }
+
+    .img {
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        margin-left: 12px;
+        color: #5e7c80;
+    }
+
+    .user_data_icon {
+        display: flex;
+        flex-direction: row;
+        margin-top: 25px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .doctor_icon {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .medical_record_icon {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .appointment_icon {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .medication_icon {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-left: 10px;
+        background-color: #a6ccd1;
+        box-shadow: 0 0px 10px 1px #181919;
+        border-radius: 5px;
+    }
+
+    .icon_text {
+        color: #495657;
+        font-weight: bold;
+        font-size: medium;
+        margin-left: 12px;
+        background-color: #a6ccd1;
+    }
+
+}
