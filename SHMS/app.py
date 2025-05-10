@@ -383,7 +383,7 @@ def review():
         cursor.execute("""SELECT s.student_name, ur.doctor_rating, ur.comment FROM user_rating ur JOIN student s ON ur.user_id = s.student_id WHERE ur.doctor_id = %s""", (doctor_id,))
         rating_data = cursor.fetchall()
 
-        return render_template('doctor_request.html', success="Request sent successfully!", doctor=doctor, rating_data=rating_data)
+        return render_template('doctor_request.html',doctor=doctor, rating_data=rating_data)
 
 
 @app.route('/doctor-request', methods=['GET', 'POST'])
@@ -464,8 +464,8 @@ def doctor_request():
             """, (Date, Issue, Time, student_id, doctor_id))
             cursor.connection.commit()
 
-            return render_template('doctor_request.html', success="Request sent successfully!", doctor=doctor,rating_data=rating_data)
-            
+            return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id)) 
+        
         return render_template('doctor_request.html', error="Student not found!", doctor=doctor,rating_data=rating_data)
 
     return render_template('doctor_request.html',rating_data=rating_data)

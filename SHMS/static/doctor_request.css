@@ -276,15 +276,6 @@ select {
         margin-left: 20px;
     }
 
-    .review1{
-        text-decoration: none;
-        box-shadow: 0px 0px 20px 2px #181919;
-        border-radius: 9px;
-        padding-left: 20px;
-        padding-bottom: 2px;
-        margin-bottom: 5px;
-    }    
-
     .body{
         box-shadow: 0px 0px 20px 2px #181919;
         border-radius: 9px;
@@ -319,4 +310,10 @@ select {
         font-size: small;
     }
 
+    .review5{
+        box-shadow: 0px 0px 20px 2px #181919;
+        border-radius: 9px;
+        padding: 15px;
+        margin-top: 10px;
+    }
 }
