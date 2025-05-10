@@ -117,8 +117,8 @@
                         </div>
                         <div class="body">
 
-                            {% for rating in rating_data %}
                             <div class="review1">
+                            {% for rating in rating_data %}
                                 <div class="review2">
                                     <p class="review3">{{rating[0]}}</p>
                                     <div class="margin">
@@ -136,9 +136,12 @@
                                 </div>
                                 <div class="info">
                                 </div>
-                                    <p class="info1">{{rating[2]}}</p>
+                                <p class="info1">{{rating[2]}}</p>
+                                {% endfor %}
+                                {% if not rating_data %}
+                                    <p class="error1">No review till date (Be the First One)</p>
+                                {% endif %}
                             </div>
-                            {% endfor %}
                         </div>
                     </div>
 x
