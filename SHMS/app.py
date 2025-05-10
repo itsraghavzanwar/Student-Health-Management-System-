@@ -354,14 +354,6 @@ def review():
         user_id = session.get('user_id') 
         rating = request.args.get('rating')
         comment = request.args.get('comment')
-        print("doctor_id:", doctor_id)
-        print("user_id:", user_id)
-        print("rating:", rating)
-        print("comment:", comment)
-        if not (doctor_id and user_id and rating and comment):
-            print("Missing data, not inserting review")
-            return redirect(url_for('doctor_request', doctor_id=doctor_id))
-
         if rating and comment and doctor_id and user_id:
             cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s)""", (doctor_id, rating, comment, user_id))
             cursor.connection.commit()
