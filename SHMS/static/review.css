@@ -105,15 +105,44 @@ select {
         background-color: #a6ccd1;
     }
 
+    .rate{
+        font-size: 60px;
+        color: #a6ccd1;
+        margin-left: 250px;
+    }
+
     .star-rating {
-        font-size: 2rem;
+        font-size: 50px;
         color: lightgray;
         cursor: pointer;
+        margin-left: 340px;
+        margin-bottom: 25px;
     }
 
     .star-rating .star.selected,.star-rating .star:hover,.star-rating .star:hover ~ .star {
         color: gold;
     }
 
+    .rating{
+        border-radius: 9px;
+        background-color: #181919;
+        color: #5e7c80;
+        margin-left: 250px;
+        height:150px;
+        padding: 5px;
+    }
+
+    .submit1{
+        margin-top: 40px;
+        border-radius: 5px;
+        box-shadow: 0 0px 10px 1px #181919;
+        background-color: #181919;
+        color: #5e7c80;
+        margin-left: 450px;
+        padding: 6px 12px;
+        font-size: 18px;
+        width: fit-content;   /* ✅ Shrink width to fit text */
+        
+    }
 
 }

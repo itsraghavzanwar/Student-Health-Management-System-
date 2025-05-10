@@ -131,7 +131,6 @@ def forgot_password():
                 server = smtplib.SMTP('smtp.gmail.com',587)
                 server.starttls()
                 
-                #set up your mail and password 
                 from_mail=''
                 server.login(from_mail,'')
                 msg = EmailMessage()
@@ -156,7 +155,6 @@ def forgot_password():
                 server = smtplib.SMTP('smtp.gmail.com', 587)
                 server.starttls()
 
-                #set up your mail and password 
                 from_mail=''
                 server.login(from_mail,'')
                 msg = EmailMessage()
@@ -219,6 +217,7 @@ def student_dashboard():
         cursor.execute(query,(email,))
         data1=cursor.fetchone()
         if data1:
+            session['user_id'] = data1[1] 
             query = "SELECT * FROM student WHERE student_email = %s"
             cursor.execute(query,(email,))
             data=cursor.fetchone()
@@ -300,7 +299,7 @@ def doctor_info():
         specialization = request.form.get('specialization')
 
         if city == 'default' or specialization == 'default':
-            return render_template('doctor_info.html', doctor_list=[])
+            return render_template('doctor_info.html', doctor_list=doctor_list)
 
         query = """
             SELECT 
@@ -336,39 +335,47 @@ def medication():
 def appointment():
     return render_template('appointment.html')
 
-@app.route('/reviewing',methods=['GET'])
+@app.route('/reviewing',methods=['GET','POST'])
 def reviewing():
-    doctor_id = 1  # fetch based on context
-    user_id = 2    # fetch from session or context
-    return render_template('review.html', doctor_id=doctor_id, user_id=user_id)
+    if request.method == 'GET':
+        if request.method == 'GET':
+            doctor_id = request.args.get('doctor_id')
+            user_id = request.args.get('user_id')
+            rating = request.args.get('rating')
+            comment = request.args.get('comment')
 
-@app.route('/submit_review', methods=['POST'])
-def submit_review():
-    doctor_id = request.form['doctor_id']
-    user_id = request.form['user_id']
-    rating = request.form['rating']
-    comment = request.form['comment']
+            if rating and comment and doctor_id and user_id:
+                cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s)""", (doctor_id, rating, comment, user_id))
+                cursor.connection.commit()
 
-    # Insert into DB
-    conn = sqlite3.connect('your_db_file.db')  # replace with actual DB path
-    cursor = conn.cursor()
-    cursor.execute("""
-        INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id)
-        VALUES (?, ?, ?, ?)
-    """, (doctor_id, rating, comment, user_id))
-    conn.commit()
-    conn.close()
+                return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
 
-    return redirect(url_for('reviewing'))
+    elif request.method == 'POST':
+        doctor_id = request.form['doctor_id']
+        user_id = request.form['user_id']
+        rating = request.form['rating']
+        comment = request.form['comment']
+
+        cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s) """, (doctor_id, rating, comment, user_id))
+        cursor.connection.commit()
+    
+        cursor.execute("SELECT * FROM doctor WHERE doctor_id = %s", (doctor_id,))
+        doctor = cursor.fetchone()
+
+        cursor.execute("""SELECT s.student_name, ur.doctor_rating, ur.comment FROM user_rating ur JOIN student s ON ur.user_id = s.student_id WHERE ur.doctor_id = %s""", (doctor_id,))
+        rating_data = cursor.fetchall()
+
+        return render_template('doctor_request.html', success="Request sent successfully!", doctor=doctor, rating_data=rating_data)
+
 
 @app.route('/doctor-request', methods=['GET', 'POST'])
 def doctor_request():
     doctor = None
     user_rating = None
     google_rating = None
-
+    doctor_id = request.args.get('doctor_id')
+    user_id = request.args.get('user_id')
     if request.method == 'GET':
-        doctor_id = request.args.get('doctor_id')
         if doctor_id:
             
 

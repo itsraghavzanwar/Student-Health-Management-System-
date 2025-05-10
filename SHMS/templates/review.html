@@ -62,9 +62,9 @@
                 </div>
 
                 <div class="content">
-                    <h2>Rate Your Doctor</h2>
+                    <p class="rate">Rate Your Doctor</p>
 
-                    <form action="/submit_review" method="POST">
+                    <form action="/reviewing" method="POST">
                         <div class="star-rating">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
@@ -72,11 +72,11 @@
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
                         </div>
-                        <input type="hidden" name="rating" id="rating">
-                        <textarea name="comment" placeholder="Leave a comment..."></textarea>
+                        <input class="rating" type="hidden" name="rating" id="rating">
+                        <textarea class="rating" name="comment" placeholder="Leave a comment..."></textarea>
                         <input type="hidden" name="doctor_id" value="{{ doctor_id }}">
                         <input type="hidden" name="user_id" value="{{ user_id }}">
-                        <button type="submit">Submit</button>
+                        <button  class="submit1" type="submit">Submit</button>
                     </form>
                 </div>
 
