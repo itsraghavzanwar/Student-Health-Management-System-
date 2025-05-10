@@ -339,6 +339,14 @@ def medication():
 def appointment():
     return render_template('appointment.html')
 
+@app.route('/medication1',methods=['GET'])
+def medication1():
+    return render_template('medication1.html')
+
+@app.route('/appointment1',methods=['GET'])
+def appointment1():
+    return render_template('appointment1.html')
+
 @app.route('/reviewing',methods=['GET','POST'])
 def reviewing():
     doctor_id = request.args.get('doctor_id')
