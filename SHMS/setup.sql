@@ -1,7 +1,6 @@
 CREATE DATABASE SHMs;
 
 USE SHMs;
-
 CREATE TABLE college (
     college_id INT PRIMARY KEY,
     college_name VARCHAR(255) NOT NULL,
@@ -93,6 +92,7 @@ CREATE TABLE appointment (
     student_id INT,
     doctor_id INT,
     appointment_status ENUM('Pending','Approved','Rejected') DEFAULT 'Pending',
+    appointment_comment TEXT,
     FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
     FOREIGN KEY (doctor_id) REFERENCES doctor(doctor_id) ON DELETE CASCADE
 )AUTO_INCREMENT = 1000;

@@ -12,9 +12,7 @@
 <body>
 
     <section class="data">
-
-        <script src="{{url_for('static',filename='doctor_dashboard.js')}}"></script>
-        <form action="/doctor-dashboard" method="GET">
+        <form action="/appointment1" method="POST">
 
             <div class="main">
 
@@ -46,13 +44,50 @@
 
                 </div>
 
-                <div class="content">
-
-                </div>
+                {% if results %}
+                    <div class="content">
+                        {% for data in results %}
+                            <div class="block">
+                                <img src="{{url_for('static',filename=data[8]+'.png')}}" class="image" alt="photo">
+                                <div class="two">
+                                    <h3>{{data[8]}}</h3>
+                                    <div class="block_data">
+                                        <div class="same">
+                                            <p class="done">Appointment No : {{data[0]}}</p>
+                                            <p class="done">Appointment Date : {{data[1]}}</p>
+                                        </div>
+                                        <div class="same1">
+                                            <p class="done">Appointment reason : {{data[2]}}</p>
+                                            <p class="done">Appointment Time : {{data[3]}}</p>
+                                        </div>
+                                    </div>
+                                    {% if data[6] == 'Pending' %}
+                                    <div class="same2">
+                                        <p class="done1">If you want to reject or approve, please add a comment for student clarification</p>
+                                        <input  class="done2" type="text" name="appointment_comment-{{data[0]}}" placeholder="comment">
+                                    </div>
+                                    <div class="same3">
+                                        <button class="button1" type="submit" name="action" value="approved-{{data[0]}}">Approve</button>
+                                        <button class="button2" type="submit" name="action" value="rejected-{{data[0]}}">Reject</button>
+                                    </div>
+                                    {% elif data[6] == 'Approved' %}
+                                        <p  class="button3">{{ data[6] }}</p>
+                                        <p class="done3">No Issue : {{ data[7] }}</p>
+                                    {% elif data[6] == 'Rejected' %}
+                                        <p class="button4">{{ data[6] }}</p>
+                                        <p class="done3">Issue : {{ data[7] }}</p>
+                                    {% endif %}
+                                </div>                        
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no_data">
+                        <p>No Appointment till Date</p>
+                    </div>
+                {% endif %}
             </div>
-
         </form>
-
     </section>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

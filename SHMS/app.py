@@ -459,9 +459,72 @@ def appointment():
 def medication1():
     return render_template('medication1.html')
 
-@app.route('/appointment1',methods=['GET'])
+@app.route('/appointment1', methods=['GET', 'POST'])
 def appointment1():
-    return render_template('appointment1.html')
+    if request.method == 'GET':
+        query = """
+            SELECT a.*, s.student_name 
+            FROM appointment a 
+            JOIN student s ON a.student_id = s.student_id 
+            ORDER BY 
+                (a.appointment_date < CURDATE() OR 
+                (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,
+                a.appointment_date ASC,
+                STR_TO_DATE(a.appointment_time, '%H:%i') ASC
+        """
+        cursor.execute(query)
+        results = cursor.fetchall()
+        return render_template('appointment1.html', results=results)
+    
+    elif request.method == 'POST':
+        action_value = request.form.get('action')
+        if action_value:
+            action, appointment_id = action_value.split('-', 1)
+            comment_field = f'appointment_comment-{appointment_id}'
+            comment = request.form.get(comment_field, '').strip()
+            
+            if not comment:
+                query = """
+                    SELECT a.*, s.student_name 
+                    FROM appointment a 
+                    JOIN student s ON a.student_id = s.student_id 
+                    ORDER BY 
+                        (a.appointment_date < CURDATE() OR 
+                        (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,
+                        a.appointment_date ASC,
+                        STR_TO_DATE(a.appointment_time, '%H:%i') ASC
+                """
+                cursor.execute(query)
+                results = cursor.fetchall()
+                return render_template('appointment1.html', results=results, error="Please add a comment before approving or rejecting.")
+            
+            status = 'Approved' if action == 'approved' else 'Rejected'
+            update_query = """
+                UPDATE appointment
+                SET appointment_status = %s, appointment_comment = %s
+                WHERE appointment_id = %s
+            """
+            cursor.execute(update_query, (status, comment, appointment_id))
+            cursor.connection.commit()
+        
+        return redirect(url_for('appointment1')) 
+
+    query = """
+        SELECT a.*, s.student_name 
+        FROM appointment a 
+        JOIN student s ON a.student_id = s.student_id 
+        ORDER BY 
+            (a.appointment_date < CURDATE() OR 
+            (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,
+            a.appointment_date ASC,
+            STR_TO_DATE(a.appointment_time, '%H:%i') ASC
+    """
+    cursor.execute(query)
+    results = cursor.fetchall()
+    return render_template('appointment1.html', results=results)
+
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True)
