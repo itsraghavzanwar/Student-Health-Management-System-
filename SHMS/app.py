@@ -325,61 +325,6 @@ def doctor_info():
         doctor_list = cursor.fetchall()
         return render_template('doctor_info.html', doctor_list=doctor_list,selected_city=city, selected_specialization=specialization)
 
-
-
-@app.route('/Medical-Record',methods=['GET'])
-def Medical_record():
-    return render_template('medical_record.html')
-
-@app.route('/Medication',methods=['GET'])
-def medication():
-    return render_template('medication_record.html')
-
-@app.route('/appointment',methods=['GET'])
-def appointment():
-    return render_template('appointment.html')
-
-@app.route('/medication1',methods=['GET'])
-def medication1():
-    return render_template('medication1.html')
-
-@app.route('/appointment1',methods=['GET'])
-def appointment1():
-    return render_template('appointment1.html')
-
-@app.route('/reviewing',methods=['GET','POST'])
-def reviewing():
-    doctor_id = request.args.get('doctor_id')
-    user_id = session.get('user_id')
-    if doctor_id:
-        session['doctor_id'] = doctor_id
-    return render_template('review.html', doctor_id=doctor_id, user_id=user_id)
-
-@app.route('/review',methods=['GET','POST'])
-def review():
-    if request.method == 'GET':
-        doctor_id = session.get('doctor_id')
-        user_id = session.get('user_id') 
-        rating = request.args.get('rating')
-        comment = request.args.get('comment')
-        if rating and comment and doctor_id and user_id:
-            cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s)""", (doctor_id, rating, comment, user_id))
-            cursor.connection.commit()
-
-            return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
-        
-    elif request.method == 'POST':
-        doctor_id = session.get('doctor_id')
-        user_id = session.get('user_id')
-        rating = request.form['rating']
-        comment = request.form['comment']
-
-        cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s) """, (doctor_id, rating, comment, user_id))
-        cursor.connection.commit()
-
-        return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
-
-
 @app.route('/doctor-request', methods=['GET', 'POST'])
 def doctor_request():
     doctor = None
@@ -464,6 +409,59 @@ def doctor_request():
         return render_template('doctor_request.html', error="Student not found!", doctor=doctor,rating_data=rating_data)
 
     return render_template('doctor_request.html',doctor=doctor,user_rating=user_rating,google_rating=google_rating,rating_data=rating_data,userIid=user_id)
+
+@app.route('/reviewing',methods=['GET','POST'])
+def reviewing():
+    doctor_id = request.args.get('doctor_id')
+    user_id = session.get('user_id')
+    if doctor_id:
+        session['doctor_id'] = doctor_id
+    return render_template('review.html', doctor_id=doctor_id, user_id=user_id)
+
+@app.route('/review',methods=['GET','POST'])
+def review():
+    if request.method == 'GET':
+        doctor_id = session.get('doctor_id')
+        user_id = session.get('user_id') 
+        rating = request.args.get('rating')
+        comment = request.args.get('comment')
+        if rating and comment and doctor_id and user_id:
+            cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s)""", (doctor_id, rating, comment, user_id))
+            cursor.connection.commit()
+
+            return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
+        
+    elif request.method == 'POST':
+        doctor_id = session.get('doctor_id')
+        user_id = session.get('user_id')
+        rating = request.form['rating']
+        comment = request.form['comment']
+
+        cursor.execute("""INSERT INTO user_rating (doctor_id, doctor_rating, comment, user_id) VALUES (%s, %s, %s, %s) """, (doctor_id, rating, comment, user_id))
+        cursor.connection.commit()
+
+        return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
+
+
+@app.route('/Medical-Record',methods=['GET'])
+def Medical_record():
+    return render_template('medical_record.html')
+
+@app.route('/Medication',methods=['GET'])
+def medication():
+    return render_template('medication_record.html')
+
+@app.route('/appointment',methods=['GET'])
+def appointment():
+    return render_template('appointment.html')
+
+@app.route('/medication1',methods=['GET'])
+def medication1():
+    return render_template('medication1.html')
+
+@app.route('/appointment1',methods=['GET'])
+def appointment1():
+    return render_template('appointment1.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
