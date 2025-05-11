@@ -118,16 +118,36 @@ insert into google_rating values (1000,3.5,27),(1001,4,22);
 CREATE TABLE medical_record (
     record_id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
-    medical_date DATE NOT NULL,
-    diagnosis TEXT,
-    prescription TEXT,
     blood_grp VARCHAR(5),
     height DECIMAL(5,2),
     weight DECIMAL(5,2),
+    student_medical_info TEXT,
     parent_medical_info TEXT,
     last_update Date NOT NULL,
     FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE
 )auto_increment = 1000;
+
+insert into medical_record(student_id,blood_grp,height,weight,student_medical_info,parent_medical_info,last_update) values(1,'B+',5.8,59.4,'No history of diabetes or hypertension
+
+Diagnosed with a small kidney stone (right side) in 2023
+
+Occasional migraine (triggered by stress or lack of sleep)
+
+No known allergies
+
+Vaccinations up to date
+
+No ongoing medication','Hypertension (controlled with medication)
+
+No diabetes
+
+History of thyroid imbalance (currently under treatment)
+
+No known drug allergies
+
+Underwent gallbladder removal surgery in 2021
+
+Takes daily medication for blood pressure and thyroid','2025-05-11');
 
 CREATE TABLE medication (
     med_id INT PRIMARY KEY AUTO_INCREMENT,
