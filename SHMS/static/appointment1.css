@@ -246,4 +246,11 @@ input,button, textarea, select {
         border: none;
         margin-left: 100px;
     }
+
+    .no_data{
+        font-size: 70px;
+        color: #a6ccd1;
+        margin-left: 280px;
+        margin-top: 40px;
+    }
 }

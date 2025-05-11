@@ -258,6 +258,7 @@ def doctor_dashboard():
         query1 = "SELECT doctor_name FROM doctor WHERE doctor_email = %s"
         cursor.execute(query1,(email,))
         data1=cursor.fetchone()
+        session['doctor_id']=data[0]
         if data1:
             username=data1[0]
             return render_template('doctor_dashboard.html',data=data,action=action,username=username)
@@ -461,20 +462,26 @@ def medication1():
 
 @app.route('/appointment1', methods=['GET', 'POST'])
 def appointment1():
+    doctor_id = session.get('doctor_id')
+    if not doctor_id:
+        return redirect(url_for('login'))
+
     if request.method == 'GET':
         query = """
             SELECT a.*, s.student_name 
             FROM appointment a 
             JOIN student s ON a.student_id = s.student_id 
+            WHERE a.doctor_id = %s
             ORDER BY 
                 (a.appointment_date < CURDATE() OR 
-                (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,
+                (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%%H:%%i') < CURTIME())) ASC,
                 a.appointment_date ASC,
-                STR_TO_DATE(a.appointment_time, '%H:%i') ASC
+                STR_TO_DATE(a.appointment_time, '%%H:%%i') ASC  # Fixed here
         """
-        cursor.execute(query)
+        cursor.execute(query, (doctor_id,))
         results = cursor.fetchall()
         return render_template('appointment1.html', results=results)
+
     
     elif request.method == 'POST':
         action_value = request.form.get('action')
@@ -484,17 +491,9 @@ def appointment1():
             comment = request.form.get(comment_field, '').strip()
             
             if not comment:
-                query = """
-                    SELECT a.*, s.student_name 
-                    FROM appointment a 
-                    JOIN student s ON a.student_id = s.student_id 
-                    ORDER BY 
-                        (a.appointment_date < CURDATE() OR 
-                        (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,
-                        a.appointment_date ASC,
-                        STR_TO_DATE(a.appointment_time, '%H:%i') ASC
-                """
-                cursor.execute(query)
+                query = """SELECT a.*, s.student_name FROM appointment a JOIN student s ON a.student_id = s.student_id WHERE a.doctor_id = %s ORDER BY (a.appointment_date < CURDATE() OR (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,a.appointment_date ASC,STR_TO_DATE(a.appointment_time, '%H:%i') ASC"""
+
+                cursor.execute(query,(doctor_id,))
                 results = cursor.fetchall()
                 return render_template('appointment1.html', results=results, error="Please add a comment before approving or rejecting.")
             
@@ -505,21 +504,35 @@ def appointment1():
                 WHERE appointment_id = %s
             """
             cursor.execute(update_query, (status, comment, appointment_id))
-            cursor.connection.commit()
-        
-        return redirect(url_for('appointment1')) 
+    
+            refresh_query = """
+                SELECT a.*, s.student_name 
+                FROM appointment a 
+                JOIN student s ON a.student_id = s.student_id 
+                WHERE a.doctor_id = %s
+                ORDER BY 
+                    (a.appointment_date < CURDATE() OR 
+                    (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%%H:%%i') < CURTIME())) ASC,
+                    a.appointment_date ASC,
+                    STR_TO_DATE(a.appointment_time, '%%H:%%i') ASC
+            """
+            cursor.execute(refresh_query, (doctor_id,))
+            results = cursor.fetchall()
+            return render_template('appointment1.html', results=results)
 
     query = """
-        SELECT a.*, s.student_name 
-        FROM appointment a 
-        JOIN student s ON a.student_id = s.student_id 
-        ORDER BY 
-            (a.appointment_date < CURDATE() OR 
-            (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,
-            a.appointment_date ASC,
-            STR_TO_DATE(a.appointment_time, '%H:%i') ASC
-    """
-    cursor.execute(query)
+    SELECT a.*, s.student_name 
+    FROM appointment a 
+    JOIN student s ON a.student_id = s.student_id 
+    WHERE a.doctor_id = %s
+    ORDER BY 
+        (a.appointment_date < CURDATE() OR 
+        (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,
+        a.appointment_date ASC,
+        STR_TO_DATE(a.appointment_time, '%H:%i') ASC
+"""
+
+    cursor.execute(query,(doctor_id,))
     results = cursor.fetchall()
     return render_template('appointment1.html', results=results)
 

@@ -57,4 +57,4 @@ A web-based application to streamline health services for students in educationa
    localhost: [Port number]
    ```
 8. **Login in detail**
-- For login functionality and email reception, please ensure your credentials are correctly stored in the MySQL database. Alternatively, you may log in using the provided credentials: Username: joyson@gmail.com Password: Test@12345 . However, please note that the 'Forgot Password' feature will not be operational, as email notifications will not be received
+- For login functionality and email reception, please ensure your credentials are correctly stored in the MySQL database. Alternatively, you may log in using the provided credentials:Student Username: joyson@gmail.com Password: Test@12345 , Doctor Username: ajayshetty@gmail.com Password: Test@12345 . However, please note that the 'Forgot Password' feature will not be operational, as email notifications will not be received

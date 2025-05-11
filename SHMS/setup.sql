@@ -1,6 +1,7 @@
 CREATE DATABASE SHMs;
 
 USE SHMs;
+
 CREATE TABLE college (
     college_id INT PRIMARY KEY,
     college_name VARCHAR(255) NOT NULL,
@@ -124,6 +125,7 @@ CREATE TABLE medical_record (
     height DECIMAL(5,2),
     weight DECIMAL(5,2),
     parent_medical_info TEXT,
+    last_update Date NOT NULL,
     FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE
 )auto_increment = 1000;
 
