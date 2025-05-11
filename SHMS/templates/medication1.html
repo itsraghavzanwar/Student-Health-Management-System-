@@ -13,7 +13,7 @@
 
     <section class="data">
 
-        <form action="/medication1" method="GET">
+        <form action="/medication1" method="POST">
 
             <div class="main">
 
@@ -45,8 +45,34 @@
 
                 </div>
 
-                <div class="content">
-
+                <div class="accept">
+                        <p class="form_heading">Fill the Form to add medication : </p>
+                        <p class="semi_heading">Add 1 Medicine at a time :</p>
+                        <div class="accept_data">
+                            <div class="box1">
+                                <p class="head">Student Id :</p>
+                                <input class="input1" name="S_Id" type="text" placeholder="id" value="{{request.form.get('S_Id','')}}">
+                                <p class="head">Appointment Id :</p>
+                                <input class="input1" name="Appointment" type="text" placeholder="Id" value="{{request.form.get('Appointment','')}}">
+                                <p class="head">Medicine Name : </p>
+                                <input class="input1" name="Medicine_name" type="text" placeholder="Medicine Name" value="{{request.form.get('Medicine_name','')}}">
+                            </div>
+                            <div class="box2">
+                                <p class="head">Dose : </p>
+                                <input class="input1" name="Dose" type="text" placeholder="Dose" value="{{request.form.get('Dose','')}}">
+                                <p class="head">Duration : </p>
+                                <input class="input1" name="Duration" type="text" placeholder="Duration" value="{{request.form.get('Duration','')}}">
+                                <p class="head">Side effect : </p>
+                                <input class="input1" name="Side_effect" type="text" placeholder="Side effect" value="{{request.form.get('Side_effect','')}}">
+                            </div>
+                        </div>
+                        <button class="submit">Submit</button>
+                        
+                        {% if success %}
+                        <p class="s1">{{ success }}</p>
+                        {% elif error %}
+                        <p class="e1">{{error}}</p>
+                        {% endif %}
                 </div>
             </div>
 

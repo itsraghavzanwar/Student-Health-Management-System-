@@ -97,4 +97,94 @@ input,button, textarea, select {
         margin-left: 15px;
         margin-bottom: 20px;
     }
+    
+    .accept{
+        display: flex;
+        flex-direction: column;
+        margin-left: 280px;
+        margin-top: 40px;
+    }
+
+    .form_heading{
+        display: flex;
+        font-size: 35px;
+        margin-bottom: 0px;
+        color: #a6ccd1;
+    }
+    .semi_heading{
+        display: flex;
+        font-size: 25px;
+        margin-bottom: 0px;
+        color: #6b7d7e;
+    }
+
+    .accept_data{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .box1{
+        display: flex;
+        flex-direction: column;
+        margin-right: 300px;
+    }
+
+    .box2{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .head{
+        font-size: 16px;
+        margin-bottom: 2px;
+        color: #5e7c80;
+    }
+
+    .input1{
+        display: flex;
+        border: 1px solid #6b7d7e;
+        border-radius: 6px;
+        background-color: #282826;
+        padding: 5px 6px;
+        color: rgb(162, 174, 174);
+    }
+
+    .submit {
+    align-items: flex-start;
+    margin-top: 40px;
+    border-radius: 6px;
+    background-color: #222222;
+    border: 1px solid #a6ccd1;
+    color: #a6ccd1;
+    margin-left: 300px;
+    padding: 10px 40px;   
+    font-size: 18px;       
+    cursor: pointer;       
+    max-width: 120px;      
+    min-height: 40px;      
+    transition: background 0.2s, color 0.2s;
+}
+
+    .submit:hover {
+        background-color: #a6ccd1;
+        color: #222222;
+    }
+
+
+    .s1{
+        margin-left: 270px;
+        margin-top: 30px;
+        display: flex;
+        color: rgb(51, 201, 119);
+        font-size: 18px;
+    }
+    
+    .e1{
+        margin-left: 340px;
+        margin-top: 30px;
+        display: flex;
+        color: rgb(209, 58, 58);
+        font-size: 18px;
+    }
 }

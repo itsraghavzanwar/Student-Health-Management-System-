@@ -478,7 +478,8 @@ def appointment1():
             comment = request.form.get(comment_field, '').strip()
             
             if not comment:
-                query = """SELECT a.*, s.student_name FROM appointment a JOIN student s ON a.student_id = s.student_id WHERE a.doctor_id = %s ORDER BY (a.appointment_date < CURDATE() OR (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%H:%i') < CURTIME())) ASC,a.appointment_date ASC,STR_TO_DATE(a.appointment_time, '%H:%i') ASC"""
+                query = """SELECT a.*, s.student_name FROM appointment a JOIN student s ON a.student_id = s.student_id WHERE a.doctor_id = %s ORDER BY (a.appointment_date < CURDATE() OR (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%%H:%%i') < CURTIME())) ASC,a.appointment_date ASC,STR_TO_DATE(a.appointment_time, '%%H:%%i') ASC"""
+
 
                 cursor.execute(query,(doctor_id,))
                 results = cursor.fetchall()
@@ -561,14 +562,29 @@ def medication():
         data=cursor.fetchall()
         return render_template('medication_record.html',data=data)
 
-
-
-
-
-
-@app.route('/medication1',methods=['GET'])
+@app.route('/medication1',methods=['GET','POST'])
 def medication1():
-    return render_template('medication1.html')
+        if request.method == 'GET':
+            return render_template('medication1.html')
+        
+        elif request.method == 'POST':
+            S_Id = request.form['S_Id']
+            Appointment = request.form['Appointment']
+            Medicine_name = request.form['Medicine_name']
+            Dose = request.form['Dose']
+            Duration = request.form['Duration']
+            Side_effect = request.form['Side_effect']
+            if not S_Id or not Appointment or not Medicine_name or not Dose or not Duration or not Side_effect:
+                return render_template('medication1.html', error="Please fill in all fields.")
+
+            cursor.execute("""
+                INSERT INTO medication (student_id,appointment_id,name,dose,duration,side_effect)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (S_Id,Appointment,Medicine_name,Dose,Duration,Side_effect))
+            cursor.connection.commit()
+
+            return render_template('medication1.html', success="Submitted Successfully")
+        
 
 if __name__ == '__main__':
     app.run(debug=True)
