@@ -143,6 +143,7 @@ select {
         padding: 6px 12px;
         font-size: 18px;
         width: fit-content;
+        border: none;
         
     }
 
