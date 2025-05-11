@@ -105,4 +105,22 @@ select {
         background-color: #a6ccd1;
     }
 
+    .content{
+        display: flex;
+        box-shadow: 0px 0px 20px 2px #181919;
+        border-radius: 9px;
+        margin-top: 25px;
+        padding: 20px;
+    }
+
+    .label{
+        color: #a6ccd1;
+        font-size: 20px;
+    }
+
+    .value{
+        color: #5e7c80;
+        font-size: 20px;
+    }
+
 }

@@ -545,18 +545,24 @@ def appointment():
         results = cursor.fetchall()
         return render_template('appointment.html', results=results)
 
-
-
-
-
-
-
-
 @app.route('/Medical-Record',methods=['GET'])
 def Medical_record():
-    return render_template('medical_record.html')
+    if request.method == 'GET':
+        student_id=session.get('user_id')
+        cursor.execute("select * from medical_record where student_id = %s",(student_id,))
+        data=cursor.fetchall()
+        return render_template('medical_record.html',data=data)
 
-@app.route('/Medication',methods=['GET'])
+
+
+
+
+
+
+
+
+
+@app.route('/medication',methods=['GET'])
 def medication():
     return render_template('medication_record.html')
 
