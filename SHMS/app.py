@@ -84,11 +84,15 @@ def login():
                 cursor.execute("SELECT student_id FROM student WHERE student_email = %s", (username,))
                 result = cursor.fetchone()
                 if result:
-                    session['user_id'] = result[0]  # <-- add this line!
+                    session['user_id'] = result[0] 
                     return redirect(url_for('student_dashboard'))
             elif profession == 'Doctor':
                 session['email']=username
-                return redirect(url_for('doctor_dashboard'))
+                cursor.execute("SELECT doctor_id FROM doctor WHERE doctor_email = %s", (username,))
+                result = cursor.fetchone()
+                if result:
+                    session['doctor_id'] = result[0]
+                    return redirect(url_for('doctor_dashboard'))
         else:
             return render_template('login.html', error="Invalid Username or Password !")
     else:
@@ -443,23 +447,6 @@ def review():
 
         return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
 
-
-@app.route('/Medical-Record',methods=['GET'])
-def Medical_record():
-    return render_template('medical_record.html')
-
-@app.route('/Medication',methods=['GET'])
-def medication():
-    return render_template('medication_record.html')
-
-@app.route('/appointment',methods=['GET'])
-def appointment():
-    return render_template('appointment.html')
-
-@app.route('/medication1',methods=['GET'])
-def medication1():
-    return render_template('medication1.html')
-
 @app.route('/appointment1', methods=['GET', 'POST'])
 def appointment1():
     doctor_id = session.get('doctor_id')
@@ -536,8 +523,46 @@ def appointment1():
     results = cursor.fetchall()
     return render_template('appointment1.html', results=results)
 
-    
+@app.route('/appointment', methods=['GET'])
+def appointment():
+    if request.method == 'GET':
+        student_id = session.get('user_id')
+        query = """
+            SELECT 
+                a.*, 
+                d.doctor_name  # Add doctor name here
+            FROM appointment a 
+            JOIN student s ON a.student_id = s.student_id 
+            JOIN doctor d ON a.doctor_id = d.doctor_id  # Join doctor table
+            WHERE a.student_id = %s
+            ORDER BY 
+                (a.appointment_date < CURDATE() OR 
+                (a.appointment_date = CURDATE() AND STR_TO_DATE(a.appointment_time, '%%H:%%i') < CURTIME())) ASC,
+                a.appointment_date ASC,
+                STR_TO_DATE(a.appointment_time, '%%H:%%i') ASC
+        """
+        cursor.execute(query, (student_id,))
+        results = cursor.fetchall()
+        return render_template('appointment.html', results=results)
 
+
+
+
+
+
+
+
+@app.route('/Medical-Record',methods=['GET'])
+def Medical_record():
+    return render_template('medical_record.html')
+
+@app.route('/Medication',methods=['GET'])
+def medication():
+    return render_template('medication_record.html')
+
+@app.route('/medication1',methods=['GET'])
+def medication1():
+    return render_template('medication1.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

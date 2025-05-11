@@ -104,4 +104,116 @@ select {
         margin-left: 12px;
         background-color: #a6ccd1;
     }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        margin-left: 220px;
+    }
+    
+    .block{
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0px 0px 20px 2px #181919;
+        border-radius: 9px;
+        padding: 20px;
+        margin: 10px;
+        margin-left: 50px;
+        width: 1100px;
+    }
+
+    .two{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .image{
+        height: 225px;
+        width: 225px;
+        border-radius:9px ;
+    }
+
+    h3{
+        font-size: 45px;
+        margin-top: 25px;
+        margin-bottom: 20px;
+        margin-left: 80px;
+        color: #a6ccd1;
+    }
+    
+    .done{
+        color: #5e7c80;
+        font-size: large;
+    }
+    
+    .done3{
+        color: #5e7c80;
+        font-size: larger;
+        margin-left: 115px;
+        font-weight: 600;
+    }
+
+    .block_data{
+        display: flex;
+        flex-direction: row;
+        margin-left: 80px;
+    }
+
+    .same{
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+    }
+
+    .same1{
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+    }
+
+
+
+    .button3{
+        background-color: rgb(52, 201, 119);
+        color: #fff;
+        font-size: 23px;
+        border-radius: 8px;
+        padding: 12px 28px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 600;
+        border: none;
+        margin-left: 100px;
+    }
+
+    .button5{
+        background-color: rgb(201, 201, 52);
+        color: #fff;
+        font-size: 23px;
+        border-radius: 8px;
+        padding: 12px 28px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 600;
+        border: none;
+        margin-left: 100px;
+    }
+
+    .button4{
+        background-color: rgb(209, 58, 58);
+        color: #fff;
+        font-size: 23px;
+        border-radius: 8px;
+        padding: 12px 28px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-weight: 600;
+        border: none;
+        margin-left: 100px;
+    }
+
+    .no_data{
+        font-size: 70px;
+        color: #a6ccd1;
+        margin-left: 280px;
+        margin-top: 40px;
+    }
 }

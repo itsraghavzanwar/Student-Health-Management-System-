@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Window</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='medication_record.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='appointment.css') }}">
     <style></style>
 </head>
 
@@ -13,7 +13,7 @@
 
     <section class="data">
 
-        <form action="/Medication" method="GET">
+        <form action="/appointment" method="GET">
 
             <div class="main">
 
@@ -61,14 +61,44 @@
 
                 </div>
 
-                <div class="content">
-
-
-
-                </div>
+                {% if results %}
+                    <div class="content">
+                        {% for data in results %}
+                            <div class="block">
+                                <img src="{{url_for('static',filename=data[8]+'.png')}}" class="image" alt="photo">
+                                <div class="two">
+                                    <h3>{{data[8]}}</h3>
+                                    <div class="block_data">
+                                        <div class="same">
+                                            <p class="done">Appointment No : {{data[0]}}</p>
+                                            <p class="done">Appointment Date : {{data[1]}}</p>
+                                        </div>
+                                        <div class="same1">
+                                            <p class="done">Appointment reason : {{data[2]}}</p>
+                                            <p class="done">Appointment Time : {{data[3]}}</p>
+                                        </div>
+                                    </div>
+                                    {% if data[6] == 'Approved' %}
+                                        <p  class="button3">{{ data[6] }}</p>
+                                        <p class="done3">No Issue : {{ data[7] }}</p>
+                                    {% elif data[6] == 'Rejected' %}
+                                        <p class="button4">{{ data[6] }}</p>
+                                        <p class="done3">Issue : {{ data[7] }}</p>
+                                    {% elif data[6] == 'Pending' %}
+                                        <p class="button5">Not Confirmed</p>
+                                    {% endif %}
+                                </div>                        
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no_data">
+                        <p>No Appointment till Date</p>
+                    </div>
+                {% endif %}
             </div>
-
         </form>
+
 
     </section>
 
