@@ -13,7 +13,7 @@
 
     <section class="data">
 
-        <form action="/Medication" method="GET">
+        <form action="/medication" method="GET">
 
             <div class="main">
 
@@ -61,11 +61,43 @@
 
                 </div>
 
-                <div class="content">
+                {% if data %}
+                    <div class="content">
+                        {% for data1 in data %}
+                            <div class="block_data">
 
-
-
-                </div>
+                                <p class="done">
+                                    <span class="label">Student Id :</span>
+                                    <span class="value">{{data1[0]}}</span>
+                                </p>
+                                {% for data2 in data %}
+                                    {% if data1[1] == data2[1] %}                
+                                        <p class="done">
+                                            <span class="label">Medicine Name :</span>
+                                            <span class="value">{{data1[2]}}</span>
+                                        </p>
+                                        <p class="done">
+                                            <span class="label">Dose :</span>
+                                            <span class="value">{{data1[3]}}</span>
+                                        </p>
+                                        <p class="done">
+                                            <span class="label">Duration :</span>
+                                            <span class="value">{{data1[4]}}</span>
+                                        </p>
+                                        <p class="done">
+                                            <span class="label">Side Effect :</span>
+                                            <span class="value">{{data1[5]}}</span>
+                                        </p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no_data">
+                        <p>No Record till Date</p>
+                    </div>
+                {% endif %}
             </div>
 
         </form>

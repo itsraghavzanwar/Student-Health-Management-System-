@@ -150,7 +150,7 @@ Underwent gallbladder removal surgery in 2021
 Takes daily medication for blood pressure and thyroid','2025-05-11');
 
 CREATE TABLE medication (
-    med_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id int,
     appointment_id INT,
     name VARCHAR(255) NOT NULL,
     dose VARCHAR(50),
