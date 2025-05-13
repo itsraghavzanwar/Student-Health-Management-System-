@@ -9,7 +9,7 @@ select {
     font: inherit;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 800px) {}
 
     body {
         background-color: #222222;
@@ -316,4 +316,3 @@ select {
         padding: 15px;
         margin-top: 10px;
     }
-}

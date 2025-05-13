@@ -6,7 +6,7 @@ input,button, textarea, select {
   font: inherit;
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 800px){}
 
     
     *{
@@ -140,4 +140,3 @@ input,button, textarea, select {
         color:#495657;
         margin-top: 50px;
     }
-}   
