@@ -492,7 +492,8 @@ def appointment1():
                 WHERE appointment_id = %s
             """
             cursor.execute(update_query, (status, comment, appointment_id))
-    
+            cursor.connection.commit()
+            
             refresh_query = """
                 SELECT a.*, s.student_name 
                 FROM appointment a 
