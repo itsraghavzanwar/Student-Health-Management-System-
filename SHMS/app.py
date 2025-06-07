@@ -23,6 +23,27 @@ app = Flask(__name__)
 app.secret_key = 'strong.()io'
 app.permanent_session_lifetime = timedelta(days=30)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 db = pymysql.connect(
     host="localhost",
     user="root",
@@ -270,6 +291,7 @@ def doctor_dashboard():
     return render_template('doctor_dashboard.html')
 
 @app.route('/doctor-info', methods=['GET', 'POST'])
+@nocache
 def doctor_info():
     if request.method == 'GET':
         email = session.get('email')
@@ -372,6 +394,7 @@ def doctor_info():
 
 
 @app.route('/doctor-request', methods=['GET', 'POST'])
+@nocache
 def doctor_request():
     doctor = None
     user_rating = None
@@ -457,6 +480,7 @@ def doctor_request():
     return render_template('doctor_request.html',doctor=doctor,user_rating=user_rating,google_rating=google_rating,rating_data=rating_data,userIid=user_id)
 
 @app.route('/reviewing',methods=['GET','POST'])
+@nocache
 def reviewing():
     doctor_id = request.args.get('doctor_id')
     user_id = session.get('user_id')
@@ -489,6 +513,7 @@ def review():
         return redirect(url_for('doctor_request', doctor_id=doctor_id, user_id=user_id))
 
 @app.route('/appointment1', methods=['GET', 'POST'])
+@nocache
 def appointment1():
     doctor_id = session.get('doctor_id')
     if not doctor_id:
@@ -567,6 +592,7 @@ def appointment1():
     return render_template('appointment1.html', results=results)
 
 @app.route('/appointment', methods=['GET'])
+@nocache
 def appointment():
     if request.method == 'GET':
         student_id = session.get('user_id')
@@ -589,6 +615,7 @@ def appointment():
         return render_template('appointment.html', results=results)
 
 @app.route('/Medical-Record',methods=['GET'])
+@nocache
 def Medical_record():
     if request.method == 'GET':
         student_id=session.get('user_id')
@@ -597,6 +624,7 @@ def Medical_record():
         return render_template('medical_record.html',data=data)
 
 @app.route('/medication',methods=['GET'])
+@nocache
 def medication():
     if request.method == 'GET':
         student_id=session.get('user_id')
@@ -605,6 +633,7 @@ def medication():
         return render_template('medication_record.html',data=data)
 
 @app.route('/medication1',methods=['GET','POST'])
+@nocache
 def medication1():
         if request.method == 'GET':
             return render_template('medication1.html')
