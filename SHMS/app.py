@@ -307,8 +307,48 @@ def doctor_info():
         city = request.form.get('city')
         specialization = request.form.get('specialization')
 
-        if city == 'default' or specialization == 'default':
+        if city == 'default' and specialization == 'default':
             return render_template('doctor_info.html', doctor_list=doctor_list)
+        elif city == 'default':
+            query = """
+                SELECT 
+                    d.doctor_id, d.doctor_name, d.doctor_speciality, d.doctor_phone, 
+                    d.doctor_email, d.doctor_address, d.doctor_city, d.doctor_gender,
+                    d.doctor_dateofbirth, d.licence_no, d.consultation_fee, 
+                    gr.doctor_google_rating, gr.total_google_rating,
+                    IFNULL(ur.avg_rating, 0), IFNULL(ur.total_raters, 0)
+                FROM doctor d
+                LEFT JOIN google_rating gr ON d.doctor_id = gr.doctor_id
+                LEFT JOIN (
+                    SELECT doctor_id, ROUND(AVG(doctor_rating), 1) AS avg_rating, COUNT(*) AS total_raters
+                    FROM user_rating
+                    GROUP BY doctor_id
+                ) ur ON d.doctor_id = ur.doctor_id
+                WHERE d.doctor_speciality = %s
+            """
+            cursor.execute(query, (specialization))
+            doctor_list = cursor.fetchall()
+            return render_template('doctor_info.html', doctor_list=doctor_list, selected_specialization=specialization)
+        elif specialization == 'default':
+            query = """
+                SELECT 
+                    d.doctor_id, d.doctor_name, d.doctor_speciality, d.doctor_phone, 
+                    d.doctor_email, d.doctor_address, d.doctor_city, d.doctor_gender,
+                    d.doctor_dateofbirth, d.licence_no, d.consultation_fee, 
+                    gr.doctor_google_rating, gr.total_google_rating,
+                    IFNULL(ur.avg_rating, 0), IFNULL(ur.total_raters, 0)
+                FROM doctor d
+                LEFT JOIN google_rating gr ON d.doctor_id = gr.doctor_id
+                LEFT JOIN (
+                    SELECT doctor_id, ROUND(AVG(doctor_rating), 1) AS avg_rating, COUNT(*) AS total_raters
+                    FROM user_rating
+                    GROUP BY doctor_id
+                ) ur ON d.doctor_id = ur.doctor_id
+                WHERE d.doctor_city = %s
+            """
+            cursor.execute(query, (city,))
+            doctor_list = cursor.fetchall()
+            return render_template('doctor_info.html', doctor_list=doctor_list,selected_city=city)
 
         query = """
             SELECT 
@@ -323,12 +363,13 @@ def doctor_info():
                 SELECT doctor_id, ROUND(AVG(doctor_rating), 1) AS avg_rating, COUNT(*) AS total_raters
                 FROM user_rating
                 GROUP BY doctor_id
-            ) ur ON d.doctor_id = ur.doctor_id
-            WHERE d.doctor_city = %s AND d.doctor_speciality = %s
-        """
+                ) ur ON d.doctor_id = ur.doctor_id
+                WHERE d.doctor_city = %s AND d.doctor_speciality = %s
+            """
         cursor.execute(query, (city, specialization))
         doctor_list = cursor.fetchall()
         return render_template('doctor_info.html', doctor_list=doctor_list,selected_city=city, selected_specialization=specialization)
+
 
 @app.route('/doctor-request', methods=['GET', 'POST'])
 def doctor_request():
