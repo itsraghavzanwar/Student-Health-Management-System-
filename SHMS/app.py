@@ -23,27 +23,6 @@ app = Flask(__name__)
 app.secret_key = 'strong.()io'
 app.permanent_session_lifetime = timedelta(days=30)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 db = pymysql.connect(
     host="localhost",
     user="root",
