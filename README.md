@@ -28,7 +28,7 @@ A web-based application to streamline health services for students in educationa
    ```
 
 2. **Mail Id setup**
-- In app.py Link your Mail Id and Password for 'Forget Password' Feature in 'forgot_password' Function at two if condition i.e 'username' and 'resend'
+- In app.py Link your Mail Id and Password for 'Forget Password' Feature in 'forgot_password' Function at two if condition i.e 'username' and 'resend' under app.py
 
 3. **Navigate to the project**
    ```bash
